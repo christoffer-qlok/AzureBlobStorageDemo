@@ -1,0 +1,27 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Blob storage upload!</h1>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload">
+        <div class="form-group">
+            <input type="file" name="file" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+
+    @if(TempData.ContainsKey("message"))
+    {
+        <p class="text-success mt-3">@TempData["message"]</p>
+    }
+</div>
+
+<div>
+    <h2>Files in storage</h2>
+    @foreach (var file in Model)
+    {
+        <p><a href="https://net22storagedemo.blob.core.windows.net/files/@file">@file</a></p>
+    }
+</div>
